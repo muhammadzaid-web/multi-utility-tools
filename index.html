@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi Utility Tool</title>
+    <link rel="icon" href="favicon.ico/icons/favico.png" type="image/x-icon" />
+    <meta name="description" content="All-in-one free online tool for BMI, Age, Unit, Currency, QR, Password, and more!" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="light-mode">
+    <header>
+        <div class="header-container">
+            <h1><i class="fas fa-tools"></i> Multi Tool Web App</h1>
+            <nav>
+                <button class="nav-btn" onclick="showTool('bmi')">
+            <i class="fas fa-weight"></i> BMI
+          </button>
+                <button class="nav-btn" onclick="showTool('age')">
+            <i class="fas fa-birthday-cake"></i> Age
+          </button>
+                <button class="nav-btn" onclick="showTool('unit')">
+            <i class="fas fa-ruler-combined"></i> Unit
+          </button>
+                <button class="nav-btn" onclick="showTool('currency')">
+            <i class="fas fa-money-bill-wave"></i> Currency
+          </button>
+                <button class="nav-btn" onclick="showTool('qr')">
+            <i class="fas fa-qrcode"></i> QR Code
+          </button>
+                <button class="nav-btn" onclick="showTool('password')">
+            <i class="fas fa-key"></i> Password
+          </button>
+                <button class="nav-btn theme-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i> Theme
+          </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- BMI Calculator -->
+        <section id="bmi" class="tool-section active">
+            <div class="tool-card">
+                <h2><i class="fas fa-weight"></i> BMI Calculator</h2>
+                <div class="input-group">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" placeholder="Enter height" />
+                </div>
+                <div class="input-group">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" placeholder="Enter weight" />
+                </div>
+                <button class="calculate-btn" onclick="calculateBMI()">
+            Calculate BMI
+          </button>
+                <div id="bmi-result" class="result-box"></div>
+                <div id="bmi-category" class="category-box"></div>
+            </div>
+        </section>
+
+        <!-- Age Calculator -->
+        <section id="age" class="tool-section">
+            <div class="tool-card">
+                <h2><i class="fas fa-birthday-cake"></i> Age Calculator</h2>
+                <div class="input-group">
+                    <label for="birthdate">Birthdate:</label>
+                    <input type="date" id="birthdate" />
+                </div>
+                <button class="calculate-btn" onclick="calculateAge()">
+            Calculate Age
+          </button>
+                <div id="age-result" class="result-box"></div>
+            </div>
+        </section>
+
+        <!-- Unit Converter -->
+        <section id="unit" class="tool-section">
+            <div class="tool-card">
+                <h2><i class="fas fa-ruler-combined"></i> Unit Converter</h2>
+                <div class="input-group">
+                    <label for="unit-value">Value:</label>
+                    <input type="number" id="unit-value" placeholder="Enter value" />
+                </div>
+                <div class="input-group">
+                    <label for="unit-from">From:</label>
+                    <select id="unit-from">
+              <option value="cm">Centimeters</option>
+              <option value="m">Meters</option>
+              <option value="km">Kilometers</option>
+              <option value="in">Inches</option>
+              <option value="ft">Feet</option>
+              <option value="mi">Miles</option>
+            </select>
+                </div>
+                <div class="input-group">
+                    <label for="unit-to">To:</label>
+                    <select id="unit-to">
+              <option value="cm">Centimeters</option>
+              <option value="m">Meters</option>
+              <option value="km">Kilometers</option>
+              <option value="in">Inches</option>
+              <option value="ft">Feet</option>
+              <option value="mi">Miles</option>
+            </select>
+                </div>
+                <button class="calculate-btn" onclick="convertUnits()">
+            Convert
+          </button>
+                <div id="unit-result" class="result-box"></div>
+            </div>
+        </section>
+
+        <!-- Currency Converter -->
+        <section id="currency" class="tool-section">
+            <div class="tool-card">
+                <h2><i class="fas fa-money-bill-wave"></i> Currency Converter</h2>
+                <div class="input-group">
+                    <label for="currency-amount">Amount:</label>
+                    <input type="number" id="currency-amount" placeholder="Enter amount" />
+                </div>
+                <div class="input-group">
+                    <label for="currency-from">From:</label>
+                    <select id="currency-from">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="JPY">JPY</option>
+              <option value="AUD">AUD</option>
+              <option value="IND">IND</option>
+            </select>
+                </div>
+                <div class="input-group">
+                    <label for="currency-to">To:</label>
+                    <select id="currency-to">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="JPY">JPY</option>
+              <option value="AUD">AUD</option>
+              <option value="IND">IND</option>
+            </select>
+                </div>
+                <button class="calculate-btn" onclick="convertCurrency()">
+            Convert
+          </button>
+                <div id="currency-result" class="result-box"></div>
+                <div class="update-info">
+                    Rates updated: <span id="rate-update">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- QR Code Generator -->
+        <section id="qr" class="tool-section">
+            <div class="tool-card">
+                <h2><i class="fas fa-qrcode"></i> QR Code Generator</h2>
+                <div class="input-group">
+                    <label for="qr-text">Text or URL:</label>
+                    <input type="text" id="qr-text" placeholder="Enter text or URL" />
+                </div>
+                <button class="generate-btn" onclick="generateQR()">
+            Generate QR
+          </button>
+                <div id="qr-result" class="qr-container"></div>
+                <button class="download-btn" onclick="downloadQR()" style="display: none">
+            Download QR
+          </button>
+            </div>
+        </section>
+
+        <!-- Password Generator -->
+        <section id="password" class="tool-section">
+            <div class="tool-card">
+                <h2><i class="fas fa-key"></i> Password Generator</h2>
+                <div class="input-group">
+                    <label for="pass-length">Length (6-32):</label>
+                    <input type="range" id="pass-length" min="6" max="32" value="12" />
+                    <span id="length-value">12</span>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+              <input type="checkbox" id="uppercase" checked /> Uppercase (A-Z)
+            </label>
+                    <label>
+              <input type="checkbox" id="lowercase" checked /> Lowercase (a-z)
+            </label>
+                    <label>
+              <input type="checkbox" id="numbers" checked /> Numbers (0-9)
+            </label>
+                    <label>
+              <input type="checkbox" id="symbols" checked /> Symbols (!@#$)
+            </label>
+                </div>
+                <button class="generate-btn" onclick="generatePassword()">
+            Generate Password
+          </button>
+                <div class="password-output-container">
+                    <input type="text" id="password-output" readonly />
+                    <button class="copy-btn" onclick="copyPassword()">
+              <i class="fas fa-copy"></i>
+            </button>
+                </div>
+                <div id="password-strength" class="strength-meter">
+                    <div class="strength-bar"></div>
+                    <span class="strength-text">Password Strength</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Multi Tool Web App |
+                <a href="#" id="share-link"><i class="fas fa-share-alt"></i> Share This</a>
+            </p>
+        </div>
+    </footer> -->
+    <footer>
+        <div class="footer-container">
+            <p>
+                &copy; 2025 Multi Tool Web App |
+                <a href="#" id="share-link" class="share-link"><i class="fas fa-share-alt"></i> Share This</a>
+                <span class="share-feedback" id="share-feedback"></span>
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/muhammadzaid-web" target="_blank"><i class="fab fa-github"></i
+          ></a>
+                <a href="https://www.youtube.com/@Code-With-Zaidy" target="_blank"><i class="fab fa-youtube"></i
+          ></a>
+                <a href="https://www.linkedin.com/in/hafiz-mohd-zaid-sre/" target="_blank"><i class="fab fa-linkedin"></i
+          ></a>
+                <a href="https://www.instagram.com/mr__z_10/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Google Analytics
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-4NJHLJBMX6");
+    </script>
+</body>
+
+</html>
